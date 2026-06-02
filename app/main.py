@@ -1,3 +1,4 @@
+import re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -37,10 +38,20 @@ async def convert_text(req: ConvertRequest):
     # 3. Gọi mô hình Groq LLM qua LangChain
     result = await call_groq(system_prompt, req.text)
     
+    # 4. Lọc những từ thực sự xuất hiện trong câu kết quả dịch (converted text)
+    used_words = []
+    result_lower = result.lower()
+    for w in relevant_words:
+        word_lower = w["tu"].lower()
+        # Định nghĩa regex khớp từ nguyên vẹn hỗ trợ tiếng Việt có dấu
+        pattern = rf'(?<![a-zA-Zà-ỹÀ-ỸđĐ]){re.escape(word_lower)}(?![a-zA-Zà-ỹÀ-ỸđĐ])'
+        if re.search(pattern, result_lower):
+            used_words.append(w)
+            
     return ConvertResponse(
         original=req.text,
         converted=result,
-        relevant_words=relevant_words
+        relevant_words=used_words
     )
 
 
