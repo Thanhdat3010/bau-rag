@@ -23,6 +23,7 @@ class ConvertRequest(BaseModel):
 class ConvertResponse(BaseModel):
     original: str
     converted: str
+    relevant_words: list[dict] = []
 
 
 @app.post("/api/convert", response_model=ConvertResponse)
@@ -36,7 +37,11 @@ async def convert_text(req: ConvertRequest):
     # 3. Gọi mô hình Groq LLM qua LangChain
     result = await call_groq(system_prompt, req.text)
     
-    return ConvertResponse(original=req.text, converted=result)
+    return ConvertResponse(
+        original=req.text,
+        converted=result,
+        relevant_words=relevant_words
+    )
 
 
 @app.get("/health")
