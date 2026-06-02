@@ -1,0 +1,12 @@
+langchain
+langchain-groq
+langchain-chroma
+langchain-huggingface
+sentence-transformers
+chromadb
+fastapi
+uvicorn[standard]
+python-dotenv
+httpx
+langchain-community
+rank_bm25
