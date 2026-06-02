@@ -107,7 +107,17 @@ Quy tắc:
 3. Chỉ thay đổi từ ngữ, cách diễn đạt — KHÔNG thêm bớt nội dung mới.
 4. Giữ giọng văn tự nhiên, mộc mạc như người Nam Bộ nói chuyện.
 5. Viết đúng chính tả tiếng Việt phương ngữ, giữ đúng các dấu thanh (sắc, huyền, hỏi, ngã, nặng) chính xác (ví dụ: "xỉu" chứ không viết thành "xiu").
-6. CHỈ trả về câu đã chuyển đổi, không giải thích gì thêm.
+
+Yêu cầu định dạng đầu ra:
+Bạn BẮT BUỘC phải trả về một đối tượng JSON (không nằm trong thẻ markdown ```json) có cấu trúc chính xác như sau:
+{{
+  "converted": "câu đã chuyển đổi sang phương ngữ Nam Bộ",
+  "used_words": ["từ_phương_ngữ_1", "từ_phương_ngữ_2"]
+}}
+
+Trong đó:
+- `converted` là câu sau khi chuyển đổi.
+- `used_words` là danh sách chứa các từ phương ngữ Nam Bộ (nằm trong cột "từ" của danh sách tham khảo dưới đây) mà bạn ĐÃ THỰC SỰ SỬ DỤNG trong câu chuyển đổi. Không đưa những từ không dùng vào đây.
 
 Từ điển phương ngữ Nam Bộ tham khảo:
 {context}"""

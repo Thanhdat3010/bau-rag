@@ -36,22 +36,31 @@ async def convert_text(req: ConvertRequest):
     system_prompt = build_prompt(req.text, relevant_words)
     
     # 3. Gọi mô hình Groq LLM qua LangChain
-    result = await call_groq(system_prompt, req.text)
+    result_str = await call_groq(system_prompt, req.text)
     
-    # 4. Lọc những từ thực sự xuất hiện trong câu kết quả dịch (converted text)
-    used_words = []
-    result_lower = result.lower()
+    # Parse JSON từ LLM
+    try:
+        import json
+        llm_data = json.loads(result_str)
+        converted_text = llm_data.get("converted", result_str)
+        used_word_list = llm_data.get("used_words", [])
+    except Exception:
+        # Fallback nếu parse lỗi
+        converted_text = result_str
+        used_word_list = []
+    
+    # So khớp danh sách từ LLM trả về với metadata chi tiết trong relevant_words
+    used_words_metadata = []
+    used_word_set = {w.lower().strip() for w in used_word_list}
+    
     for w in relevant_words:
-        word_lower = w["tu"].lower()
-        # Định nghĩa regex khớp từ nguyên vẹn hỗ trợ tiếng Việt có dấu
-        pattern = rf'(?<![a-zA-Zà-ỹÀ-ỸđĐ]){re.escape(word_lower)}(?![a-zA-Zà-ỹÀ-ỸđĐ])'
-        if re.search(pattern, result_lower):
-            used_words.append(w)
+        if w["tu"].lower().strip() in used_word_set:
+            used_words_metadata.append(w)
             
     return ConvertResponse(
         original=req.text,
-        converted=result,
-        relevant_words=used_words
+        converted=converted_text,
+        relevant_words=used_words_metadata
     )
 
 
