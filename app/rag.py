@@ -40,6 +40,7 @@ if os.path.exists(jsonl_path):
                         "tu_hien_nay": entry.get("tu_hien_nay", ""),
                         "nghia": entry["nghia"],
                         "vi_du": json.dumps(vi_du_list, ensure_ascii=False),
+                        "pos": json.dumps(entry.get("pos", []), ensure_ascii=False),
                     }
                 )
                 bm25_documents.append(doc)
@@ -71,6 +72,7 @@ def search_relevant_words(query: str) -> list[dict]:
             "nghia": doc.metadata["nghia"],
             "tu_hien_nay": doc.metadata.get("tu_hien_nay", ""),
             "vi_du": doc.metadata.get("vi_du", "[]"),
+            "pos": doc.metadata.get("pos", "[]"),
         })
     return results
 
@@ -80,6 +82,15 @@ def build_prompt(user_sentence: str, relevant_words: list[dict]) -> str:
     context_lines = []
     for w in relevant_words:
         line = f'- "{w["tu"]}" = {w["nghia"]}'
+        
+        pos_list = []
+        try:
+            pos_list = json.loads(w.get("pos", "[]"))
+        except:
+            pass
+        if pos_list:
+            line += f' (Từ loại: {", ".join(pos_list)})'
+            
         if w.get("tu_hien_nay"):
             line += f' (hiện nay nói: "{w["tu_hien_nay"]}")'
         context_lines.append(line)

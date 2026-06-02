@@ -52,6 +52,7 @@ def main():
                     "tu_hien_nay": entry.get("tu_hien_nay", ""),
                     "nghia": entry["nghia"],
                     "vi_du": json.dumps(vi_du_list, ensure_ascii=False),
+                    "pos": json.dumps(entry.get("pos", []), ensure_ascii=False),
                 }
             )
             documents.append(doc)
