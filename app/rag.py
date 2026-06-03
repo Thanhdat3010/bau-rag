@@ -158,7 +158,7 @@ Chú ý quan trọng:
 
 Trong đó:
 - `converted` là câu sau khi chuyển đổi.
-- `used_words` là danh sách chứa các từ phương ngữ Nam Bộ (nằm trong cột "từ" của danh sách tham khảo dưới đây) mà bạn ĐÃ THỰC SỰ SỬ DỤNG trong câu chuyển đổi. Không đưa những từ không dùng vào đây.
+- `used_words` là danh sách BẮT BUỘC chứa đầy đủ và chính xác tất cả các từ hoặc cụm từ phương ngữ Nam Bộ (nằm trong cột "từ" của danh sách tham khảo dưới đây) mà bạn đã thực sự đưa vào câu dịch `converted`. Hãy rà soát thật kỹ câu dịch để tránh bỏ sót bất kỳ từ nào. Không đưa những từ không có trong danh sách tham khảo hoặc không dùng vào đây.
 
 Từ điển phương ngữ Nam Bộ tham khảo:
 {context}"""
