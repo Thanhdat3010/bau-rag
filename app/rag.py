@@ -145,20 +145,17 @@ Quy tắc:
 4. Giữ giọng văn tự nhiên, mộc mạc như người Nam Bộ nói chuyện.
 5. Viết đúng chính tả tiếng Việt phương ngữ, giữ đúng các dấu thanh (sắc, huyền, hỏi, ngã, nặng) chính xác (ví dụ: "xỉu" chứ không viết thành "xiu").
 
-Yêu cầu định dạng đầu ra:
-Bạn BẮT BUỘC phải trả về một đối tượng JSON có cấu trúc chính xác như sau, bắt đầu bằng dấu {{ và kết thúc bằng dấu }}:
+Trả về đối tượng JSON duy nhất có cấu trúc:
 {{
   "converted": "câu đã chuyển đổi sang phương ngữ Nam Bộ",
   "used_words": ["từ_phương_ngữ_1", "từ_phương_ngữ_2"]
 }}
 
-Chú ý quan trọng:
-- Hãy bắt đầu trực tiếp bằng dấu {{ và kết thúc bằng dấu }}. Tuyệt đối không viết các ký tự bao bọc như ```json hoặc ```.
-- Không viết thêm bất kỳ văn bản giải thích hoặc lời bình luận nào bên ngoài đối tượng JSON.
-
 Trong đó:
-- `converted` là câu sau khi chuyển đổi.
-- `used_words` là danh sách BẮT BUỘC chứa đầy đủ và chính xác tất cả các từ hoặc cụm từ phương ngữ Nam Bộ (nằm trong cột "từ" của danh sách tham khảo dưới đây) mà bạn đã thực sự đưa vào câu dịch `converted`. Hãy rà soát thật kỹ câu dịch để tránh bỏ sót bất kỳ từ nào. Không đưa những từ không có trong danh sách tham khảo hoặc không dùng vào đây.
+- "converted" chỉ chứa duy nhất câu đã dịch xong, không chứa bất kỳ nội dung giải thích hay suy luận nào.
+- "used_words" là danh sách đầy đủ tất cả các từ phương ngữ (nằm trong cột "từ" của danh sách tham khảo) mà bạn đã dùng trong câu dịch. Rà soát kỹ để không bỏ sót.
 
 Từ điển phương ngữ Nam Bộ tham khảo:
 {context}"""
+
+

@@ -42,17 +42,19 @@ async def convert_text(req: ConvertRequest):
     try:
         import json
         
-        # Hàm trích xuất JSON phụ trợ
+        # Bước 1: Loại bỏ thẻ <think>...</think> (mô hình suy luận tự sinh ra)
+        clean_result = re.sub(r'<think>.*?</think>', '', result_str, flags=re.DOTALL).strip()
+        
+        # Bước 2: Trích xuất khối JSON từ chuỗi kết quả
         def extract_json_content(text: str) -> str:
             text = text.strip()
-            # Tìm cặp dấu ngoặc {} đầu tiên và cuối cùng
             start = text.find('{')
             end = text.rfind('}')
             if start != -1 and end != -1 and end > start:
                 return text[start:end+1]
             return text
             
-        cleaned_str = extract_json_content(result_str)
+        cleaned_str = extract_json_content(clean_result)
         llm_data = json.loads(cleaned_str)
         converted_text = llm_data.get("converted", result_str)
         used_word_list = llm_data.get("used_words", [])
