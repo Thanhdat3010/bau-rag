@@ -62,6 +62,32 @@ retriever = EnsembleRetriever(
 
 
 
+def format_pos(pos_str: str) -> str:
+    """Chuyển đổi các từ loại không dấu sang tiếng Việt có dấu và trả về JSON string."""
+    try:
+        pos_list = json.loads(pos_str)
+    except Exception:
+        pos_list = [pos_str] if pos_str else []
+        
+    pos_map = {
+        "vi tu": "Vị từ",
+        "danh tu": "Danh từ",
+        "quan ngu": "Quán ngữ",
+        "cam tu": "Cảm từ",
+        "dai tu": "Đại từ",
+        "vi ngu": "Vị ngữ",
+        "phu tu": "Phụ từ",
+        "tinh tu": "Tính từ",
+        "dong tu": "Động từ",
+        "lien tu": "Liên từ",
+        "gioi tu": "Giới từ",
+        "than tu": "Thán từ"
+    }
+    
+    mapped_list = [pos_map.get(p.lower().strip(), p) for p in pos_list]
+    return json.dumps(mapped_list, ensure_ascii=False)
+
+
 def search_relevant_words(query: str) -> list[dict]:
     """Tìm top-K từ phương ngữ liên quan nhất với câu input."""
     docs = retriever.invoke(query)
@@ -72,7 +98,7 @@ def search_relevant_words(query: str) -> list[dict]:
             "nghia": doc.metadata["nghia"],
             "tu_hien_nay": doc.metadata.get("tu_hien_nay", ""),
             "vi_du": doc.metadata.get("vi_du", "[]"),
-            "pos": doc.metadata.get("pos", "[]"),
+            "pos": format_pos(doc.metadata.get("pos", "[]")),
         })
     return results
 
