@@ -140,11 +140,10 @@ Nhiệm vụ: Chuyển đổi câu tiếng Việt hiện đại sang cách nói 
 
 Quy tắc:
 1. Dựa vào danh sách từ phương ngữ bên dưới để thay thế từ ngữ phù hợp.
-2. Giữ nguyên ý nghĩa và các chi tiết của câu gốc, không tự ý thay đổi các từ ngữ không có trong danh sách phương ngữ (ví dụ: "ăn ké" phải giữ nguyên hoặc thay thế bằng từ Nam Bộ tương đương nếu có, tuyệt đối không tự ý đổi thành "ăn hủ tiếu").
+2. Bạn BẮT BUỘC chỉ được phép dùng các từ phương ngữ có trong danh sách từ điển tham khảo dưới đây. Tuyệt đối không tự ý suy đoán, phát minh hoặc tự ý sinh ra các từ phương ngữ không có trong danh sách.
 3. Chỉ thay đổi từ ngữ, cách diễn đạt — KHÔNG thêm bớt nội dung mới.
 4. Giữ giọng văn tự nhiên, mộc mạc như người Nam Bộ nói chuyện.
 5. Viết đúng chính tả tiếng Việt phương ngữ, giữ đúng các dấu thanh (sắc, huyền, hỏi, ngã, nặng) chính xác (ví dụ: "xỉu" chứ không viết thành "xiu").
-6. Tự động phát hiện và sửa các lỗi chính tả hoặc lỗi gõ phím hiển nhiên trong dữ liệu tham khảo (ví dụ: sửa "lừa đão" thành "lừa đảo", "lưởng" thành "lưỡng", "ngay tan mại" thành "ngày tàn mại") để đảm bảo câu dịch cuối cùng đúng chính tả tiếng Việt chuẩn.
 
 Yêu cầu định dạng đầu ra:
 Bạn BẮT BUỘC phải trả về một đối tượng JSON có cấu trúc chính xác như sau, bắt đầu bằng dấu {{ và kết thúc bằng dấu }}:
