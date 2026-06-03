@@ -120,11 +120,15 @@ Quy tắc:
 5. Viết đúng chính tả tiếng Việt phương ngữ, giữ đúng các dấu thanh (sắc, huyền, hỏi, ngã, nặng) chính xác (ví dụ: "xỉu" chứ không viết thành "xiu").
 
 Yêu cầu định dạng đầu ra:
-Bạn BẮT BUỘC phải trả về một đối tượng JSON (không nằm trong thẻ markdown ```json) có cấu trúc chính xác như sau:
+Bạn BẮT BUỘC phải trả về một đối tượng JSON có cấu trúc chính xác như sau, bắt đầu bằng dấu {{ và kết thúc bằng dấu }}:
 {{
   "converted": "câu đã chuyển đổi sang phương ngữ Nam Bộ",
   "used_words": ["từ_phương_ngữ_1", "từ_phương_ngữ_2"]
 }}
+
+Chú ý quan trọng:
+- Hãy bắt đầu trực tiếp bằng dấu {{ và kết thúc bằng dấu }}. Tuyệt đối không viết các ký tự bao bọc như ```json hoặc ```.
+- Không viết thêm bất kỳ văn bản giải thích hoặc lời bình luận nào bên ngoài đối tượng JSON.
 
 Trong đó:
 - `converted` là câu sau khi chuyển đổi.
