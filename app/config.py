@@ -13,4 +13,4 @@ COLLECTION_NAME = "nam_bo_dictionary"
 # Dùng multilingual model vì dataset là tiếng Việt
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
-TOP_K = 20  # Số từ phương ngữ trả về khi search
+TOP_K = 10  # Số từ phương ngữ trả về khi search
