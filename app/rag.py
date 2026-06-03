@@ -93,6 +93,17 @@ def build_prompt(user_sentence: str, relevant_words: list[dict]) -> str:
             
         if w.get("tu_hien_nay"):
             line += f' (hiện nay nói: "{w["tu_hien_nay"]}")'
+            
+        vi_du_list = []
+        try:
+            vi_du_list = json.loads(w.get("vi_du", "[]"))
+        except:
+            pass
+        if vi_du_list:
+            vi_du_str = ", ".join([f'"{vd.strip()}"' for vd in vi_du_list if vd.strip()])
+            if vi_du_str:
+                line += f' (Ví dụ dùng: {vi_du_str})'
+                
         context_lines.append(line)
 
     context = "\n".join(context_lines)
